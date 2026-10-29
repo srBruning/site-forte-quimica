@@ -61,7 +61,7 @@ O SEO da página inclui título, descrição, idioma `pt-BR`, metadados sociais,
 | `src/pages/blog/[slug].astro` | Modelo de cada artigo |
 | `src/data/posts.ts` | Textos, descrições, fontes e tabelas dos artigos |
 | `src/layouts/BaseLayout.astro` | Layout, metadados e dados estruturados |
-| `src/components/ContactCard.jsx` | Links de WhatsApp, Instagram e Facebook com ícones |
+| `src/components/ContactCard.jsx` | Links de WhatsApp e Instagram com ícones |
 | `src/styles.css` | Estilos globais e Tailwind CSS |
 | `public/images/` | Logotipo e imagem de compartilhamento |
 
