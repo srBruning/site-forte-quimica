@@ -24,7 +24,7 @@ npm run build
 npm run preview
 ```
 
-O build fica na pasta `dist/`. Para publicar, envie o conteúdo dessa pasta para uma hospedagem de sites estáticos.
+O build fica na pasta `dist/`. O repositório inclui um workflow de publicação no GitHub Pages a cada push na branch `main`. Ative **Settings → Pages → Build and deployment → Source: GitHub Actions** no repositório para permitir o primeiro deploy. O endereço configurado é `https://srbruning.github.io/site-forte-quimica/`.
 
 ## Configurar o domínio e o SEO
 
