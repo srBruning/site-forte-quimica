@@ -7,10 +7,11 @@ const {
   pageType = 'website',
   structuredData
 } = Astro.props;
-const siteUrl = import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, '');
-const canonical = siteUrl ? `${siteUrl}${Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '')}` : undefined;
-const socialImage = siteUrl ? `${siteUrl}/images/compartilhamento-forte-quimica.jpg` : undefined;
-const logo = siteUrl ? `${siteUrl}/images/logo-forte-quimica.png` : undefined;
+const base = import.meta.env.BASE_URL;
+const siteRoot = Astro.site ? new URL(base, Astro.site).href.replace(/\/$/, '') : undefined;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const socialImage = Astro.site ? new URL(`${base}images/compartilhamento-forte-quimica.jpg`, Astro.site).href : undefined;
+const logo = Astro.site ? new URL(`${base}images/logo-forte-quimica.png`, Astro.site).href : undefined;
 const business = {
   '@context': 'https://schema.org',
   '@type': 'Store',
@@ -28,8 +29,8 @@ const business = {
   ],
   sameAs: ['https://www.instagram.com/fortequimicapolibom/', 'https://www.facebook.com/fortequimica/']
 };
-const website = siteUrl ? {
-  '@context': 'https://schema.org', '@type': 'WebSite', name: 'Forte Química Polibom', url: siteUrl
+const website = siteRoot ? {
+  '@context': 'https://schema.org', '@type': 'WebSite', name: 'Forte Química Polibom', url: siteRoot
 } : undefined;
 ---
 <!doctype html>

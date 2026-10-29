@@ -24,7 +24,17 @@ npm run build
 npm run preview
 ```
 
-O build fica na pasta `dist/`. O repositório inclui um workflow de publicação no GitHub Pages a cada push na branch `main`. Ative **Settings → Pages → Build and deployment → Source: GitHub Actions** no repositório para permitir o primeiro deploy. O endereço configurado é `https://srbruning.github.io/site-forte-quimica/`.
+O build fica na pasta `dist/`.
+
+### Publicar na Vercel
+
+Importe o repositório na Vercel e use o preset **Astro**. Mantenha o diretório raiz do projeto como `.`. A Vercel detecta o comando `npm run build` e o diretório de saída `dist` automaticamente; não é necessário configurar `base` ou instalar um adapter para este site estático. Se houver overrides antigos, use **Build Command:** `npm run build` e **Output Directory:** `dist`.
+
+A configuração usa a URL de produção fornecida pela Vercel para os metadados de SEO. Se você tiver um domínio próprio, defina `PUBLIC_SITE_URL` com a URL completa desse domínio nas variáveis de ambiente de produção da Vercel e faça um novo deploy. Não use a URL do GitHub Pages nessa variável ao publicar na Vercel.
+
+### Publicar no GitHub Pages
+
+O repositório inclui um workflow de publicação no GitHub Pages a cada push na branch `main`. Ative **Settings → Pages → Build and deployment → Source: GitHub Actions** no repositório para permitir o deploy. Nesse workflow, o prefixo `/site-forte-quimica/` é aplicado somente ao build do GitHub Pages.
 
 ## Configurar o domínio e o SEO
 
@@ -38,7 +48,7 @@ cp .env.example .env
 PUBLIC_SITE_URL=https://seu-dominio.com.br
 ```
 
-Defina a mesma variável no ambiente de build da hospedagem. Ela é usada para gerar URLs absolutas nas tags `canonical`, Open Graph e X/Twitter, nos dados estruturados e no `sitemap.xml`. Sem o domínio configurado, essas URLs não são publicadas para evitar referências incorretas. Depois da publicação, confira `https://SEU-DOMINIO/robots.txt` e `https://SEU-DOMINIO/sitemap.xml`.
+Na Vercel, essa variável é opcional quando você usa o domínio de produção fornecido pela plataforma. Defina-a para um domínio próprio. Ela é usada para gerar URLs absolutas nas tags `canonical`, Open Graph e X/Twitter, nos dados estruturados e no `sitemap.xml`. Sem o domínio configurado, essas URLs não são publicadas para evitar referências incorretas. Depois da publicação, confira `https://SEU-DOMINIO/robots.txt` e `https://SEU-DOMINIO/sitemap.xml`.
 
 O SEO da página inclui título, descrição, idioma `pt-BR`, metadados sociais, imagem de compartilhamento, dados estruturados da loja e dos artigos, além de `robots.txt` e sitemap. A configuração fica em `src/layouts/BaseLayout.astro`, `src/pages/robots.txt.ts` e `src/pages/sitemap.xml.ts`.
 

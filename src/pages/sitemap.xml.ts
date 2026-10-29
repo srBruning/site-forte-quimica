@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
 import { posts } from '../data/posts';
 
-export const GET: APIRoute = () => {
-  const siteUrl = import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, '');
+export const GET: APIRoute = ({ site }) => {
+  const siteUrl = site ? new URL(import.meta.env.BASE_URL, site).href.replace(/\/$/, '') : undefined;
   if (!siteUrl) return new Response('Configure PUBLIC_SITE_URL para gerar o sitemap.', { status: 404 });
   const paths = ["/", "/blog/", ...posts.map(post => `/blog/${post.slug}/`)];
   const urls = paths.map(path => `<url><loc>${siteUrl}${path}</loc></url>`).join("");
